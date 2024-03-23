@@ -10,6 +10,12 @@ variable "dashboard_version" {
     description = "Tekton Dashboard version"
 }
 
+variable "pac_version" {
+    type        = string
+    default     = "0.24.5"
+    description = "Tekton Pipelines As Code version"
+}
+
 variable "host" {
     type        = string
     default     = null
