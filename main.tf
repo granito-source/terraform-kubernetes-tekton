@@ -42,7 +42,7 @@ data "kubectl_file_documents" "dashboard" {
 }
 
 resource "kubectl_manifest" "dashboard" {
-    depends_on = [kubernetes_namespace_v1.pipelines]
+    depends_on = [kubectl_manifest.pipelines]
     for_each   = data.kubectl_file_documents.dashboard.manifests
     yaml_body  = each.value
 }
