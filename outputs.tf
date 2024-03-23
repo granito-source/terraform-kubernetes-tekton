@@ -5,5 +5,5 @@ locals {
 output "dashboard_url" {
     depends_on  = [kubectl_manifest.dashboard]
     value       = local.configure_ingress ? "${local.protocol}://${var.host}/" : null
-    description = "installed application URL"
+    description = "installed dashboard URL"
 }
