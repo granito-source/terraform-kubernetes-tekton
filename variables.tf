@@ -16,10 +16,16 @@ variable "pac_version" {
     description = "Tekton Pipelines As Code version"
 }
 
-variable "host" {
+variable "dashboard_host" {
     type        = string
     default     = null
-    description = "FQDN for the dashboard ingress, must be set to configure ingress"
+    description = "FQDN for the dashboard, must be set to configure ingress"
+}
+
+variable "pac_host" {
+    type        = string
+    default     = null
+    description = "FQDN for Pipelines As Code, must be set to configure ingress"
 }
 
 variable "ingress_class_name" {
