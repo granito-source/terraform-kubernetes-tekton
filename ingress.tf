@@ -46,7 +46,7 @@ resource "kubernetes_ingress_v1" "dashboard" {
         }
     }
     spec {
-        ingress_class_name = var.ingress_class_name
+        ingress_class_name = var.ingress_class
         rule {
             host = var.dashboard_host
             http {
@@ -82,7 +82,7 @@ resource "kubernetes_ingress_v1" "pac" {
         }
     }
     spec {
-        ingress_class_name = var.ingress_class_name
+        ingress_class_name = var.ingress_class
         rule {
             host = var.pac_host
             http {
