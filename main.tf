@@ -25,8 +25,16 @@ resource "kubernetes_namespace_v1" "pac" {
     }
 }
 
+locals {
+    pipelines_version = var.pipelines_version == null ? "latest" : "previous/v${var.pipelines_version}"
+    dashboard_version = var.dashboard_version == null ? "latest" : "previous/v${var.dashboard_version}"
+    pac_url           = var.pac_version == null ?
+    "https://raw.githubusercontent.com/openshift-pipelines/pipelines-as-code/stable/release.k8s.yaml" :
+    "https://github.com/openshift-pipelines/pipelines-as-code/releases/download/${var.pac_version}/release.k8s.yaml"
+}
+
 data "http" "pipelines" {
-    url = "https://storage.googleapis.com/tekton-releases/pipeline/previous/v${var.pipelines_version}/release.yaml"
+    url = "https://storage.googleapis.com/tekton-releases/pipeline/${local.pipelines_version}/release.yaml"
 }
 
 data "kubectl_file_documents" "pipelines" {
@@ -43,7 +51,7 @@ resource "kubectl_manifest" "pipelines" {
 }
 
 data "http" "dashboard" {
-    url = "https://storage.googleapis.com/tekton-releases/dashboard/previous/v${var.dashboard_version}/release.yaml"
+    url = "https://storage.googleapis.com/tekton-releases/dashboard/${local.dashboard_version}/release.yaml"
 }
 
 data "kubectl_file_documents" "dashboard" {
@@ -57,7 +65,7 @@ resource "kubectl_manifest" "dashboard" {
 }
 
 data "http" "pac" {
-    url = "https://github.com/openshift-pipelines/pipelines-as-code/releases/download/v${var.pac_version}/release.k8s.yaml"
+    url = local.pac_url
 }
 
 data "kubectl_file_documents" "pac" {

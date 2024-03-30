@@ -1,18 +1,18 @@
 variable "pipelines_version" {
     type        = string
-    default     = "0.56.2"
+    default     = null
     description = "Tekton Pipelines version"
 }
 
 variable "dashboard_version" {
     type        = string
-    default     = "0.43.1"
+    default     = null
     description = "Tekton Dashboard version"
 }
 
 variable "pac_version" {
     type        = string
-    default     = "0.24.5"
+    default     = null
     description = "Tekton Pipelines As Code version"
 }
 
